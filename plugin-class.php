@@ -28,8 +28,6 @@ class WSR_myplugin{
         add_action( 'admin_init', array($this, 'check_required_plugins_exists') );
  		register_activation_hook( __FILE__, array($this, 'on_activation') );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
-		add_filter( 'single_template', array($this, 'override_single_template' ));
-		add_filter( 'archive_template', array($this, 'override_archive_template' ));
 		add_shortcode('wsr_myplugin', array($this, 'wsr_myplugin_shortcode'));
 	}
 
@@ -78,33 +76,6 @@ class WSR_myplugin{
 			wp_enqueue_style( 'wsr-myplugin-css', $this->settings['path'] . '/myplugin.css' );
 			wp_enqueue_script( 'wsr-myplugin-js', $this->settings['path'] . '/myplugin.js', array('jquery'), '20160102', true );
 		}
-	}
-
-
-
-	/***********************************************************
-	 *  To use myplugin theme file for single instead of themes
-	 */
-	function override_single_template( $template ){
-		global $post;
-		$found = locate_template('single-wsr_myplugin_post_type.php');
-		 if($post->post_type == 'wsr_myplugin_post_type' && $found == ''){
-	        $template = $this->settings['dir']  . '/single-wsr_myplugin_post_type.php';
-	    }
-	    return $template;
-	}
-
-
-	/***********************************************************
-	 *  To use plugin theme file for single instead of themes
-	 */
-	public function override_archive_template($template){
-		global $post;
-		$found = locate_template('archive-wsr_myplugin_post_type.php');
-		 if($post->post_type == 'wsr_myplugin_post_type' && $found == ''){
-	      	return plugin_dir_path(__FILE__) . '/archive-wsr_myplugin_post_type.php';
-	    }
-	  	return $template;
 	}
 
 
