@@ -72,10 +72,9 @@ class WSR_myplugin{
 	 */
 	function register_plugin_scripts(){
 		wp_enqueue_script('jquery');
-		if ( is_singular( 'wsr_myplugin_post_type' ) ) {
-			wp_enqueue_style( 'wsr-myplugin-css', $this->settings['path'] . '/myplugin.css' );
-			wp_enqueue_script( 'wsr-myplugin-js', $this->settings['path'] . '/myplugin.js', array('jquery'), '20160102', true );
-		}
+		//change these to enqueue if not restricted to shortcode
+		wp_register_style( 'wsr-myplugin-css', $this->settings['path'] . '/myplugin.css' );
+		wp_register_script( 'wsr-myplugin-js', $this->settings['path'] . '/myplugin.js', array('jquery'), '20160102', true );
 	}
 
 
@@ -91,13 +90,11 @@ class WSR_myplugin{
 		//$to_use = $a['element'];
 
 		//Enqueue any scripts needed - Note, need to register the script first then enqueue here	
-		//wp_enqueue_script( 'thickbox');
+		wp_enqueue_style( 'wsr-myplugin-css');
+		wp_enqueue_script( 'wsr-myplugin-js'); 
 
-		//output html
-			ob_start(); ?> 
-			<p>html goes here</p>
-			<!-- add lightbox -->
-			<script> jQuery(document).ready(function(){ jQuery("a").nivoLightbox(); });</script>
+		ob_start(); ?> 
+		<p>html goes here</p>
 		<?php return ob_get_clean();
 	}
 }
