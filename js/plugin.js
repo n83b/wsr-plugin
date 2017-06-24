@@ -44,7 +44,8 @@ jQuery(function(){
 		    	mydata: param
 		    }
 		})
-		.done(function(res) {
+		.done(function(res, txtStatus, request) {
+			//request.getResponseHeader('X-WP-TotalPages'),
 			console.log("success");
 			return res;
 		})
