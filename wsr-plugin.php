@@ -27,6 +27,7 @@ class WSR_plugin{
 		//actions
         add_action( 'admin_init', array($this, 'check_required_plugins_exists') );
  		register_activation_hook( __FILE__, array($this, 'on_activation') );
+ 		register_deactivation_hook( __FILE__, array($this, 'on_deactivate') );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
 		add_shortcode('wsr_plugin', array($this, 'wsr_plugin_shortcode'));
 		add_action( 'wp_ajax_wsr_action', array($this, 'wsr_ajax_callback' ));
@@ -65,6 +66,14 @@ class WSR_plugin{
 	function on_activation(){
 		//call function to create custom posts here
 		flush_rewrite_rules();
+	}
+
+
+	/***********************************************************
+	 *  When plugin is de-activated
+	 */
+	function on_deactivate(){
+
 	}
 
 
