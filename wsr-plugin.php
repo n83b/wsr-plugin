@@ -121,7 +121,7 @@ class WSR_plugin{
 	 */	
 	function wsr_ajax_callback(){
 		check_ajax_referer( 'security-nounce-here', 'security' );
-		$result = $_POST['mydata'];
+		$result = sanitize_text_field($_POST['mydata']);
 
 		wp_send_json_success($result);
 		wp_die();
