@@ -24,14 +24,20 @@ class WSR_plugin{
 			'currentUrl' => "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"
 		);
 
-		//actions
+		//init
         add_action( 'admin_init', array($this, 'check_required_plugins_exists') );
  		register_activation_hook( __FILE__, array($this, 'on_activation') );
  		register_deactivation_hook( __FILE__, array($this, 'on_deactivate') );
+ 		//scripts
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
+		//shortcode
 		add_shortcode('wsr_plugin', array($this, 'wsr_plugin_shortcode'));
+		//ajax
 		add_action( 'wp_ajax_wsr_action', array($this, 'wsr_ajax_callback' ));
 		add_action( 'wp_ajax_nopriv_wsr_action', array($this, 'wsr_ajax_callback' ));
+		//templates
+		add_filter('single_template', array($this, 'wsr_template_single'));
+		add_filter('archive_template', array($this, 'wsr_template_archive'));
 	}
 
 
@@ -125,6 +131,38 @@ class WSR_plugin{
 
 		wp_send_json_success($result);
 		wp_die();
+	}
+
+
+	
+	/***********************************************************
+	 *  Create single template
+	 */	
+	function wsr_template_single($single_template){
+		global $post;
+		$found = locate_template('single-myposttype.php');
+		if($post->post_type == 'myposttype' && !$found){
+			$single_template = dirname(__FILE__).'/templates/single-myposttype.php';
+		}
+
+		return $single_template;
+	}
+
+
+
+	/***********************************************************
+	 *  Create archive template
+	 */	
+	function wsr_template_archive($template){
+		if(is_post_type_archive('myposttype')){
+			$theme_files = array('archive-myposttype.php');
+			$exists_in_theme = locate_template($theme_files, false);
+			if(!$exists_in_theme){
+				return plugin_dir_path(__FILE__) . '/templates/archive-myposttype.php';
+			}
+		}
+		
+		return $template;
 	}
 }
 
