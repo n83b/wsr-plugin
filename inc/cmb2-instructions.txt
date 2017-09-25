@@ -1,0 +1,14 @@
+http://github.com/CMB2/CMB2
+Read Instalations
+
+If including the library in your plugin or theme:
+
+1. Place the CMB2 directory inside of your theme or plugin.
+
+2.Copy (and rename if desired) example-functions.php into a folder above the CMB2 directory OR copy the entirety of its contents to your theme's functions.php file.
+
+3. Edit to only include the fields you need and rename the functions (CMB2 directory should be left unedited in order to easily update the library).
+
+4. Profit.
+
+5. In plugin main file, ensure cab is included: require_once('inc/cmb2.php');

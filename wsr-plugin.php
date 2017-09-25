@@ -11,7 +11,7 @@ License: A short license name. Example: GPL2
 
 
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
-
+//require_once('inc/cmb2.php');
 class WSR_plugin{
 
 	var $settings;
