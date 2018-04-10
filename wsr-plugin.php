@@ -20,7 +20,7 @@ class WSR_plugin{
  		//plugin settings
 		$this->settings = array(
 			'path'	=>  plugins_url() . '/wsr-plugin',
-			'dir'	=> dirname( __FILE__ ),
+			'dir'	=> plugin_dir_path(__FILE__),
 			'currentUrl' => "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"
 		);
 
