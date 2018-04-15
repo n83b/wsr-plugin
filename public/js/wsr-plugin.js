@@ -9,27 +9,6 @@ jQuery(function(){
 
 
 	/***********************************************************
-	 * Events
-	 */
-
-
-	 /***********************************************************
-	 * View
-	 */
-	function renderView(){
-		var data = getData();
-		if (data.success){
-			var source = jQuery("#wsr-tmpl").html();
-			var template = Handlebars.compile(source);
-			var html = template({data: data});
-			jQuery('#wsrplugin').html(html);
-    	}else{
-    		jQuery('#wsrplugin').html('error');
-    	}
-	}
-
-
-	/***********************************************************
 	 * Ajax
 	 */
 	function getData(param){
