@@ -1,11 +1,11 @@
 <?php 
 /*
 Plugin Name: WSR plugin
-Plugin URI: http://websektor.com.au
+Plugin URI: http://websector.com.au
 Description: 
 Version: 1.0.0
 Author: WSR
-Author URI: http://websektor.com.au
+Author URI: http://websector.com.au
 License: A short license name. Example: GPL2
 
 
