@@ -164,7 +164,11 @@ class WSR_plugin{
 		 *  Output to error log in current plugin directory
 		 */	
 		function error_log($msg){
-			error_log(print_r($msg, true), 3, plugin_dir_path(__FILE__) . "/debug.log");
+			$timezone_string = get_option('timezone_string');
+			date_default_timezone_set($timezone_string);
+
+			$log = "[" . date("Y-m-d g:ia") . "] " . $msg . "\n";
+			error_log($log, 3, plugin_dir_path(__FILE__) . '/debug.log');
 		}
 
 	}
