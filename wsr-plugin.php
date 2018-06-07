@@ -27,6 +27,10 @@ License: A short license name. Example: GPL2
 	WSR_plugin
 	wsr_plugin
 	wsr-plugin
+
+	Helpers:
+	File system path to plugin:  plugin_dir_path(__FILE__);
+	URL to plugin:  plugins_url(__FILE__)
 */
 
 
@@ -151,6 +155,18 @@ class WSR_plugin{
 			wp_send_json_success($result);
 			wp_die();
 		}
+
+
+		// --------------------------------------------------------------------
+
+
+		/**
+		 *  Output to error log in current plugin directory
+		 */	
+		function error_log($msg){
+			error_log(print_r($msg, true), 3, plugin_dir_path(__FILE__) . "/debug.log");
+		}
+
 	}
 }
 
