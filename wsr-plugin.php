@@ -100,7 +100,7 @@ class WSR_plugin{
 			if (!is_admin()){
 				wp_enqueue_script('jquery');
 				//change these to enqueue if not restricted to shortcode
-				wp_register_style( 'wsr-plugin-css', plugins_url('public/css/wsr-plugin.css', __FILE__), array(''), WSR_PLUGIN_VER, false);
+				wp_register_style( 'wsr-plugin-css', plugins_url('public/css/wsr-plugin.css', __FILE__), array(), WSR_PLUGIN_VER, false);
 				wp_register_script( 'wsr-plugin-js', plugins_url('public/js/wsr-plugin.js', __FILE__), array('jquery'), WSR_PLUGIN_VER, true );
 				//wp_enqueue_style( 'wsr-plugin-css');
 				//wp_enqueue_script( 'wsr-plugin-js'); 
