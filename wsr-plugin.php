@@ -54,6 +54,10 @@ class WSR_plugin{
 			//Admin
 	 		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts'));
 
+	 		//templates
+	 		add_filter('single_template', array( $this, 'load_movie_template'));
+	 		add_filter('archive_template', array($this, 'load_movie_archive_template'));
+
 			//front end
 			add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts'));
 			add_shortcode('wsr_plugin', array($this, 'wsr_plugin_shortcode'));
@@ -158,6 +162,50 @@ class WSR_plugin{
 
 
 		// --------------------------------------------------------------------
+		
+
+
+		/*
+		 * For using template from plugin
+		 * Allows moving template to root of theme folder for override
+		 */
+		function load_movie_template($template) {
+		    global $post;
+
+		    if ($post->post_type == "movie" && $template !== locate_template(array("single-movie.php"))){
+		        /* This is a "movie" post 
+		         * AND a 'single movie template' is not found on 
+		         * theme or child theme directories, so load it 
+		         * from our plugin directory
+		         */
+		        return plugin_dir_path( __FILE__ ) . "single-movie.php";
+		    }
+
+		    return $template;
+		}
+
+
+
+
+		// --------------------------------------------------------------------
+		
+
+
+		function load_movie_archive_template($template) {
+		    global $post;
+
+		    if (is_post_type_archive("movie") && $template !== locate_template(array("archive-movie.php"))){
+
+		        return plugin_dir_path( __FILE__ ) . "archive-movie.php";
+		    }
+
+		    return $template;
+		}
+
+
+
+		// --------------------------------------------------------------------
+
 
 
 		/**
