@@ -9,7 +9,7 @@ Author URI: http://websector.com.au
 License: A short license name. Example: GPL2
 
 
-	Copyright 2013 Websektor
+	Copyright 2013 Websector
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as
 	published by the Free Software Foundation.
