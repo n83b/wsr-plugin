@@ -28,7 +28,11 @@ if( !defined( 'WSR_PLUGIN_VER' ) )
 	define( 'WSR_PLUGIN_VER', '1.0.0' );
 
 
-// Start up the engine
+$wsr_plugin_config = array(
+	'api_key' => 'cd64539dd19283cdcc637f2ccddcd45-us6'
+);
+
+
 if ( !class_exists( 'WSR_plugin' ) ) {
 class WSR_plugin{
 
@@ -36,7 +40,9 @@ class WSR_plugin{
 		static $instance = false;
 
 
-		private function __construct(){
+		private function __construct($config){
+			
+			$this->api_key = $config['api_key'];
 
 			//Admin
 	 		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts'));
@@ -59,9 +65,9 @@ class WSR_plugin{
 		/**
 		 * If an instance exists, this returns it.  If not, it creates one
 		 */
-		public static function getInstance() {
+		public static function getInstance($config) {
 			if ( !self::$instance )
-				self::$instance = new self;
+				self::$instance = new self($config);
 			return self::$instance;
 		}
 
@@ -211,7 +217,7 @@ class WSR_plugin{
 
 
 // Instantiate our class
-$WSR_plugin = WSR_plugin::getInstance();
+$WSR_plugin = WSR_plugin::getInstance($wsr_plugin_config);
 
 
 
