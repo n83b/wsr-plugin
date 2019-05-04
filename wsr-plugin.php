@@ -30,7 +30,7 @@ $myplugin_config = array(
 if ( !class_exists( 'Myplugin' ) ) {
 
 //Include ACF
-include_once( plugin_dir_path(__FILE__) . '/include/acf/acf.php' );
+//include_once( plugin_dir_path(__FILE__) . '/include/acf/acf.php' );
 
 
 class Myplugin{
@@ -82,7 +82,7 @@ class Myplugin{
 		function register_admin_scripts(){
 			//if load onliy on a certain admin page
 			// if ( 'edit.php' != $wsrplugin ) { return; }
-			wp_enqueue_style( 'myplugin-admin', plugins_url('', __FILE__), array(), 'v1.1', 'all' );
+			wp_enqueue_style( 'myplugin-admin', plugins_url('admin/css/myplugin.css', __FILE__), array(), 'v1.1', 'all' );
 		}
 
 
@@ -94,8 +94,8 @@ class Myplugin{
 		 */
 		function register_plugin_scripts(){
 			if (!is_admin()){
-				wp_register_style( 'myplugin-css', plugins_url('', __FILE__), array(), 'v1.1', false);
-				wp_register_script( 'myplugin-js', plugins_url('public/js/myplugin.js', __FILE__), array(), 'v1.1', true );
+				wp_register_style( 'myplugin-css', plugins_url('public/css/myplugin.css', __FILE__), array(), 'v1.1', false);
+				wp_register_script( 'myplugin-js', plugins_url('public/js/dist/main.js', __FILE__), array(), 'v1.1', true );
 				//wp_enqueue_style( 'myplugin-css');
 				//wp_enqueue_script( 'myplugin-js'); 
 			}
@@ -180,15 +180,12 @@ class Myplugin{
 			wp_enqueue_style( 'myplugin-css');
 			wp_enqueue_script( 'myplugin-js'); 
 			wp_localize_script('myplugin-js', 'myplugin_ajax', array(	
-				"ajaxurl" => admin_url('admin-ajax.php'),
-				"ajax_nonce" => wp_create_nonce('security-nounce-here'),
 				"siteurl" => get_bloginfo('url'),
-				"path" => plugins_url('', __FILE__)
 			));
 
 			ob_start(); ?> 
 
-			output stuff here
+			<div id="myplugin"></div>
 
 			<?php return ob_get_clean();
 		}
