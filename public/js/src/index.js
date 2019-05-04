@@ -6,7 +6,8 @@ class App extends React.Component {
 		super(props);
 		this.state ={
 			siteurl: myplugin_ajax.siteurl,
-			posts: null
+			posts: null,
+            isLoaded: false
 		}
 	}
 
@@ -16,14 +17,33 @@ class App extends React.Component {
         .then(
             (result) => {
                 this.setState({
-                    posts: result
+                    posts: result,
+                    isLoaded: true
                 })
             }
         )
 	}
 
 	render() {
-    	return ( <div></div>)
+
+        var isLoaded = this.state.isLoaded;
+        var posts = this.state.posts;
+
+        if (!isLoaded) {
+          return <div>Loading...</div>;
+        } else {    
+        	return ( 
+        		<div>
+        			<ul>
+        				{posts.map(post => (
+        					<li key={post.id}>
+        					{post.title.rendered}
+        					</li>
+        				))}
+        			</ul>
+        		</div>
+        	)
+        }
     }
 }
 
