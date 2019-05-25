@@ -183,12 +183,25 @@ class Myplugin{
 				"siteurl" => get_bloginfo('url'),
 			));
 
+
+			//****
+			//Calling $this->template_render allows varibles to be used in template.
+			//if use this can below ob below
+
 			ob_start(); ?> 
-
 			<div id="myplugin"></div>
-
 			<?php return ob_get_clean();
 		}
+
+
+
+		// --------------------------------------------------------------------
+
+
+
+		function template_render(){
+        	include('template.php');
+    	}
 
 
 		// --------------------------------------------------------------------
