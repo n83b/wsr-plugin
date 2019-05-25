@@ -14,8 +14,8 @@ License: A short license name. Example: GPL2
 	myplugin
 
 	HELPERS:
-	plugin_dir_path(__FILE__);
-	plugins_url(__FILE__)
+	plugin_dir_path( __FILE__ );
+	plugin_dir_url( __FILE__ )
 */
 
 
